@@ -46,7 +46,9 @@
   					<div class="col-md-2"></div>
   					<div class="col-md-8">
   						<h3><i class="fa fa-user"></i> Additional information</h3>
-  						<form id="bit_exchange_form" action="{!! route('order.submit') !!}" method="post">
+              <form  id="bit_exchange_form" action="{!! route('order.submit2') !!}" method="POST">
+
+  						{{-- <form> --}}
                 @CSRF
   							<div class="form-group">
   								<label>Your email address</label>

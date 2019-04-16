@@ -10,9 +10,9 @@
                   <!-- row -->
 @php
   $page_id = session('page_id');
-  // echo '<pre>';
-  // print_r($Order_all) ;
-  // echo '</pre>';
+  echo '<pre>';
+  print_r($Order_all) ;
+  echo '</pre>';
 @endphp
                   <div class="row">
                     <!-- product-list -->
@@ -22,7 +22,7 @@
                       <div class="row">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-    
+
 					<div>
 									<table class="table table-striped">
 										<tbody><tr>
@@ -33,7 +33,7 @@
 				</tr>
 										<tr>
 											<td><span class="pull-left"><b>Exchange ID</b></span></td>
-											<td><span class="pull-right"><b>32B5DE20381384D77FA7</b></span></td>
+											<td><span class="pull-right"><b>{{ $Order_all['exchange_id'] }}</b></span></td>
 										</tr>
 										<tr>
 											<td><span class="pull-left">Amount send</span></td>

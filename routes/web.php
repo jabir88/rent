@@ -7,7 +7,7 @@ Auth::routes();
 
 Route::get('currency/add', 'currencyController@create')->name('currency.add');
 Route::post('currency/generate', 'MyController@generate')->name('generate');
-Route::post('currency/order/submit', 'MyController@generate_sub')->name('order.submit');
+Route::post('currency/order/submit', 'MyController@generate_sub')->name('order.submit2');
 Route::post('currency/order/confirm', 'MyController@confirm')->name('confirm');
 Route::prefix('admin/')->group(function () {
     Route::get('/', 'HomeController@admin')->name('admin');

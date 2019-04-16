@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Currency;
+use App\Order;
 use Carbon\Carbon;
 
 class MyController extends Controller
@@ -50,5 +51,49 @@ class MyController extends Controller
         } else {
             return back()->with('error', 'You Can Order Minimum 10$ !');
         }
+    }
+    public function generate_sub(Request $req)
+    {
+        // $req_done=   $req->validate([
+        //
+        //  ]);
+        // $req->validate([
+        //               'customer_name' => 'required|email',
+        //                'customer_email' => 'required|email',
+        //                'customer_phone' => 'required|min:5',
+        //              ]);
+
+        // $this->validate(, [
+        //
+        // ]);
+        // return $req->all();
+
+        $order_id=  Order::insertGetId([
+          'currency_buying_price'=>$req->send_currency_buying_price,
+          'currency_selling_price'=>$req->receive_currency_selling_price ,
+          'customer_email'=>$req->customer_email ,
+          'customer_name'=>$req->customer_name ,
+          'customer_phone'=>$req->customer_phone ,
+          'recive_cur_name'=>$req->recive_cur_name ,
+          'send_cur_name'=>$req->send_cur_name ,
+          'taka_ditase'=>$req->taka_ditase ,
+          'taka_ditase_rate'=>$req->taka_ditase_rate ,
+          'exchange_id'=>$req->exchange_id ,
+          'tk_dimu'=>$req->tk_dimu ,
+          'confirm'=> 0 ,
+          'created_at'=> Carbon::now() ,
+
+            ]);
+        $Order_all =  Order::findOrFail($order_id);
+        return view('frontend.home.home3', compact('Order_all'));
+    }
+    public function confirm(Request $req)
+    {
+        Order::where('id', $req->order_id)
+              ->update([
+              'confirm' => 1,
+            ]);
+        $Order_all =  Order::findOrFail($req->order_id);
+        return view('frontend.home.home4', compact('Order_all'));
     }
 }

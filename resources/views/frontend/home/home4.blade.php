@@ -11,7 +11,7 @@
 @php
   $page_id = session('page_id');
   // echo '<pre>';
-  // print_r($Order_all) ;
+  // print_r($Order_all['recive_cur_name']) ;
   // echo '</pre>';
 @endphp
                   <div class="row">
