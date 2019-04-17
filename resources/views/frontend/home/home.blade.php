@@ -16,6 +16,7 @@
                     <!-- product-list -->
                     <div class="col-md-9">
                       <!-- categorys -->
+                      {{-- <img src="{{asset('/frontend/images/Neteller.jpg') }}" > --}}
 
                         <div class="row" id="bit_exchange_box">
                           <div id="bit_exchange_results"></div>
@@ -65,7 +66,7 @@
                                             @endif >
                                           {{ $currency->currency_name }}
                                         </option>
-                                  @endforeach
+                                              @endforeach
                                     </select>
                                   </div>
                                   @php
@@ -75,7 +76,7 @@
 var my_val =$("#bwtl").val();
 // console.log(one);
   $("#bwtl").on('change',function () {
-    var one = '{{ url('/public/storage/') }}';
+    var one = '{{  asset('storage/') }}';
 
     var value = $(this).val();
     var value = $(this).val();
