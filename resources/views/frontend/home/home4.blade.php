@@ -10,22 +10,110 @@
                   <!-- row -->
 @php
   $page_id = session('page_id');
-  // echo '<pre>';
-  // print_r($Order_all['recive_cur_name']) ;
-  // echo '</pre>';
+  echo '<pre>';
+  print_r($Order_all) ;
+  echo '</pre>';
 @endphp
                   <div class="row">
                     <!-- product-list -->
                     <div class="col-md-9">
                       <!-- categorys -->
 
-                <div class="row"> <div class="col-md-2"></div> <div class="col-md-8"> <div id="bit_transaction_results"><div class="alert alert-info"><i class="fa fa-info-circle"></i> You need to make payment manually, use the data below and enter the number of the transaction in the form below.</div></div> <form id="bit_confirm_transaction"> <table class="table table-striped"> <tbody><tr> <td colspan="2">
-                  <h4>Data about transfer</h4></td> </tr> <tr>
-                    <td colspan="2">
-                      This exchange is done manually by an operator. Work time: 10:00 AM - 11:00 PM, GMT +6</td>
-                     </tr> <tr> <td colspan="2"><br></td>
-                      </tr> <tr> <td><span class="pull-left">Our Bkash Personal details</span></td> <td><span class="pull-right"></span></td> </tr> <tr> <td><span class="pull-left">Bkash Personal Number</span></td> <td><span class="pull-right">xxx</span></td> </tr><tr> <td><span class="pull-left">Active Mobile Number</span></td> <td><span class="pull-right"></span></td> </tr> <tr> <td colspan="2"><br></td> </tr> <tr> <td><span class="pull-left">Enter payment amount</span></td> <td><span class="pull-right">10000 </span></td> </tr> <tr> <td><span class="pull-left">Enter payment description</span></td> <td><span class="pull-right">Exchange 10000 (1220)</span></td> </tr> </tbody></table> <div class="form-group"> <label>Enter transaction number/batch</label> <input type="text" class="form-control" name="transaction_id"> </div> <button type="button" onclick="bit_confirm_transaction('1220');" class="btn btn-primary btn-block">Confirm transaction</button> </form> </div> <div class="col-md-2"></div> </div>
-                      </div><!-- category-ad -->
+                <div class="row"> <div class="col-md-2"></div> <div class="col-md-8"> <div id="bit_transaction_results"><div class="alert alert-info"><i class="fa fa-info-circle"></i> You need to make payment manually, use the data below and enter the number of the transaction in the form below.</div></div>
+
+                   <table class="table table-striped">
+                      <tbody>
+                        <tr>
+                          <td colspan="2">
+                            <h4>Data about transfer</h4>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">
+                            This exchange is done manually by an operator. Work time: 10:00 AM - 11:00 PM, GMT +6
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2"><br></td>
+                      </tr>
+@if($Order_all['send_cur_name'] != 'Bkash'){
+                      <tr>
+                          <td>
+                            <span class="pull-left">Our {{$Order_all['send_cur_name'] }} details</span>
+                          </td>
+                          <td>
+                            <span class="pull-right"></span>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td><span class="pull-left">{{$Order_all['send_cur_name'] }} Email</span>
+                          </td>
+                          <td>
+                            <span class="pull-right">jabirhasan88@gmail.com</span>
+                          </td>
+                      </tr>
+
+                      }@else{
+                        <tr>
+                            <td>
+                              <span class="pull-left">Our Bkash Personal details</span>
+                            </td>
+                            <td>
+                              <span class="pull-right"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="pull-left">Bkash Personal Number</span>
+                            </td>
+                            <td>
+                              <span class="pull-right">01941480946</span>
+                            </td>
+                        </tr>
+                      }
+                      @endif
+                        <tr>
+                          <td>
+                            <span class="pull-left">Active Mobile Number</span>
+                          </td>
+                          <td>
+                            <span class="pull-right">
+                              01941480946
+                            </span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="2">
+                            <br>
+                          </td>
+                         </tr>
+                          <tr>
+                             <td>
+                               <span class="pull-left">Enter payment amount</span>
+                             </td>
+                              <td>
+                                <span class="pull-right">{{ $Order_all['taka_ditase'] }} </span>
+                              </td>
+                             </tr>
+                              <tr>
+                                 <td>
+                                   <span class="pull-left">You Will Recive</span>
+                                 </td>
+                                  <td>
+                                    <span class="pull-right">{{ $Order_all['tk_dimu'] }}</span>
+                                  </td>
+                                 </tr>
+                                </tbody>
+                              </table>
+                          <form class="" action="{{ route('confirm.done')}}" method="post">
+                            @csrf
+                            <div class="form-group"> <label>Enter transaction number/batch</label>
+                              <input type="text" class="form-control" name="transaction_id"> </div>
+                              <input type="hidden" class="form-control" value="{{ $Order_all['id'] }}" name="order_id"> </div>
+                              <button type="submit" class="btn btn-primary btn-block">Confirm transaction</button>
+                          </form>
+                         </div> <div class="col-md-2"></div> </div>
+                      </div>
+                      <!-- category-ad -->
 
                       <!-- featureds -->
                       <div class="section featureds">

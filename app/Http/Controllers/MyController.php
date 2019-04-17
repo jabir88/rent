@@ -19,15 +19,21 @@ class MyController extends Controller
     {
         $taka_ditase = $req->bit_amount_send;
         if ($taka_ditase >=10) {
-            $send_cur = Currency::where('currency_name', $req->bit_gateway_send)->get();
+            $se_name=  explode('||#||', $req->bit_gateway_send);
+            $send_cur = Currency::where('currency_name', $se_name[0])->get();
             $send_cur_all = $send_cur[0];
             $send_cur_name =$send_cur_all['currency_name'];
             $send_cur_buying_price =$send_cur_all['currency_buying_price'];
             $send_cur_currency_selling_price =$send_cur_all['currency_selling_price'];
 
+
             $taka_ditase_rate = $taka_ditase*$send_cur_buying_price;
-            $recive_cur = Currency::where('currency_name', $req->bit_gateway_receive)->get();
+            $Rec_name=  explode('||#||', $req->bit_gateway_receive);
+            $Rec_name00=  $Rec_name[0];
+
+            $recive_cur = Currency::where('currency_name', $Rec_name00)->get();
             $recive_cur_all = $recive_cur[0];
+        
             $recive_cur_name =$recive_cur_all['currency_name'];
             $recive_cur_buying_price =$recive_cur_all['currency_buying_price'];
             $recive_cur_selling_price =$recive_cur_all['currency_selling_price'];
@@ -95,5 +101,13 @@ class MyController extends Controller
             ]);
         $Order_all =  Order::findOrFail($req->order_id);
         return view('frontend.home.home4', compact('Order_all'));
+    }
+    public function confirm_done(Request $req)
+    {
+        Order::where('id', $req->order_id)
+              ->update([
+                'transaction_details' =>$req->transaction_id,
+              ]);
+        return redirect('/')->with('success', 'Thank You For Your Order ');
     }
 }

@@ -25,8 +25,9 @@
                               </div>
                           @endif
                           @if (session('success'))
-                              <div class="alert alert-success">
+                              <div class="alert alert-success" style="text-align : center;">
                                   {{ session('success') }}
+                                  one
                               </div>
                           @endif
 
@@ -58,9 +59,10 @@
 
 
                                   @foreach ($currency as $currency)
-                                            <option value="{{ $currency->currency_name }}" @if ($currency->currency_name == "Skrill")
+                                            <option value="{{ $currency->currency_name.'||#||'. $currency->currency_pic.'||#||'. $currency->currency_buying_price}}"
+                                              @if ($currency->currency_name == "Skrill")
                                               {{ 'selected' }}
-                                            @endif>
+                                            @endif >
                                           {{ $currency->currency_name }}
                                         </option>
                                   @endforeach
@@ -71,13 +73,17 @@
                                   @endphp
 <script type="text/javascript">
 var my_val =$("#bwtl").val();
-console.log(my_val);
+// console.log(one);
   $("#bwtl").on('change',function () {
+    var one = '{{ url('/public/storage/') }}';
 
     var value = $(this).val();
-    var link = + value + '.jpg';
-    alert($a);
-    // $("#image_send").attr('src','')
+    var value = $(this).val();
+    var all = value.split('||#||');
+    var image1 =all[1];
+    var image1last = one+'/'+all[1];
+    $("#image_send").attr('src', image1last)
+    console.log(image1last);
   });
 </script>
 
@@ -98,11 +104,12 @@ console.log(my_val);
                                 <div class="col-md-9">
                                   <h3><i class="fa fa-arrow-up"></i> Receive </h3>
                                   <div class="form-group">
-                                    <select class="form-control form_style_1 input-lg bwtl_recive" id="bwt2" name="bit_gateway_receive" onchange="bit_refresh('2');">
+                                    <select class="form-control form_style_1 input-lg bwtl_recive" id="bwt2" name="bit_gateway_receive" >
                                       @foreach ($currency1 as $currency1)
-                                        <option value="{{ $currency1->currency_name }}" @if ($currency1->currency_name == "Neteller")
+                                        <option value="{{ $currency1->currency_name .'||#||'. $currency->currency_pic.'||#||'. $currency->currency_selling_price }}"
+                                          @if ($currency1->currency_name == "Neteller")
                                           {{ 'selected' }}
-                                        @endif>
+                                        @endif >
                                         {{ $currency1->currency_name }} </option>
                                       @endforeach
                                     </select>
@@ -111,9 +118,9 @@ console.log(my_val);
                                     console.log(my_val);
                                       $("#bwt2").on('change',function () {
 
-                                        var value = $(this).val();
-                                        var link = + value + '.jpg';
-                                        alert(value);
+                                        var value22 = $(this).val();
+                                        var all2 = value22.split('||#||');
+                                        console.log(all2);
                                       });
                                     </script>
                                     {{-- <script type="text/javascript">
